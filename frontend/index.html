@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>업무 말투 변환기 — 비즈니스 커뮤니케이션 전문가</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💼 업무 말투 변환기</h1>
+            <p>전달하고 싶은 내용을 상황에 맞는 비즈니스 언어로 바꿔보세요.</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <label for="inputText">원문 입력</label>
+                <textarea id="inputText" placeholder="내용을 입력하세요. (예: 내일까지 보고서 제출 어려울 것 같음)"></textarea>
+            </section>
+
+            <section class="selection-section">
+                <label>수신 대상 선택</label>
+                <div class="target-group">
+                    <button type="button" class="target-btn" data-target="boss">👔 상사/임원</button>
+                    <button type="button" class="target-btn" data-target="colleague">🤝 타팀 동료</button>
+                    <button type="button" class="target-btn" data-target="client">🌐 고객/외부</button>
+                    <button type="button" class="target-btn" data-target="team">👥 팀 내 동료</button>
+                </div>
+            </section>
+
+            <section class="action-section">
+                <button id="convertBtn" class="primary-btn">변환하기</button>
+            </section>
+
+            <section class="output-section">
+                <div class="output-header">
+                    <label for="outputText">변환 결과</label>
+                    <button id="copyBtn" class="secondary-btn">복사하기 📋</button>
+                </div>
+                <textarea id="outputText" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 업무 말투 변환기 | Powered by Upstage Solar-Pro2</p>
+        </footer>
+    </div>
+
+    <!-- 로딩 인디케이터 -->
+    <div id="loadingOverlay" class="hidden">
+        <div class="spinner"></div>
+        <p>말투 변환 중...</p>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

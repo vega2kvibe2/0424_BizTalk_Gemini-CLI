@@ -1,0 +1,204 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "프로젝트 환경 설정 및 디렉토리 구조 생성",
+        "description": "가상환경을 설정하고 PRD에 명시된 백엔드 및 프론트엔드 폴더 구조를 생성합니다.",
+        "details": "1. `python -m venv .venv`로 가상환경 생성 및 활성화.\n2. `backend/`, `frontend/` 하위 디렉토리(routers, services, prompts, models, css, js) 생성.\n3. `.gitignore` 생성 (`.env`, `.venv`, `__pycache__` 포함).\n4. `backend/requirements.txt` 작성 (fastapi, uvicorn, langchain, langchain-upstage, python-dotenv, pydantic 포함) 및 설치.",
+        "testStrategy": "가상환경 활성화 상태에서 `pip list`를 통해 필수 패키지 설치 확인 및 디렉토리 구조가 PRD와 일치하는지 확인.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.020Z"
+      },
+      {
+        "id": "2",
+        "title": "백엔드 데이터 모델 및 프롬프트 템플릿 정의",
+        "description": "API 요청/응답을 위한 Pydantic 모델과 수신 대상별 프롬프트를 정의합니다.",
+        "details": "1. `backend/models/schemas.py`에 `ConvertRequest`(text, target_audience)와 `ConvertResponse`(converted_text, target_audience, original_text) 정의.\n2. `backend/prompts/templates.py`에 `PROMPTS` 딕셔너리 생성 (boss, colleague, client, team 대상별 시스템 프롬프트 작성).",
+        "testStrategy": "Python 스크립트에서 schemas와 templates를 import하여 데이터 구조 및 텍스트 내용이 의도대로 정의되었는지 확인.",
+        "priority": "medium",
+        "dependencies": [
+          "1"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.029Z"
+      },
+      {
+        "id": "3",
+        "title": "LangChain 기반 Upstage Solar-Pro2 변환 로직 구현",
+        "description": "LangChain과 Upstage API를 연동하여 실제 말투 변환을 수행하는 서비스를 구현합니다.",
+        "details": "1. `backend/services/tone_converter.py` 작성.\n2. `langchain_upstage.ChatUpstage` 인스턴스화 (API Key는 `.env`에서 로드).\n3. `ChatPromptTemplate`을 사용하여 시스템 메시지와 사용자 입력을 결합.\n4. 선택된 `target_audience`에 따른 프롬프트를 적용하여 LLM 호출 및 결과 반환 로직 작성.",
+        "testStrategy": "임의의 텍스트와 대상(boss 등)을 파라미터로 넘겨 LLM이 정상적으로 응답을 생성하는지 유닛 테스트 수행.",
+        "priority": "high",
+        "dependencies": [
+          "2"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.033Z"
+      },
+      {
+        "id": "4",
+        "title": "FastAPI 라우터 및 메인 앱 서버 구축",
+        "description": "API 엔드포인트를 노출하고 CORS 및 정적 파일 서빙을 설정합니다.",
+        "details": "1. `backend/routers/convert.py`에 `POST /convert` 엔드포인트 구현.\n2. `backend/main.py`에서 FastAPI 객체 생성 및 라우터 등록.\n3. `CORSMiddleware` 설정 (모든 origin 허용 후 배포 시 제한).\n4. `StaticFiles`를 사용하여 `frontend/` 디렉토리 마운트 및 `/health` 엔드포인트 추가.",
+        "testStrategy": "uvicorn으로 서버 실행 후 `http://localhost:8000/docs` 접속하여 Swagger UI에서 `/api/convert` 호출 테스트.",
+        "priority": "high",
+        "dependencies": [
+          "3"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.037Z"
+      },
+      {
+        "id": "5",
+        "title": "프론트엔드 HTML 마크업 및 기본 레이아웃",
+        "description": "사용자 입력을 위한 텍스트 영역, 대상 선택 버튼, 결과 영역을 포함한 HTML을 작성합니다.",
+        "details": "1. `frontend/index.html` 작성.\n2. 헤더, 원문 입력창(id='inputText'), 대상 선택 버튼 그룹(data-target 속성 포함), 변환 버튼, 결과창(id='outputText'), 복사 버튼 구성.\n3. 각 요소에 JS 접근용 ID 부여.",
+        "testStrategy": "브라우저에서 `index.html`을 열어 모든 UI 구성 요소가 PRD 레이아웃 가이드에 맞게 배치되었는지 확인.",
+        "priority": "medium",
+        "dependencies": [
+          "1"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.042Z"
+      },
+      {
+        "id": "6",
+        "title": "CSS 스타일링 및 반응형 디자인 적용",
+        "description": "PRD 스타일 가이드에 따른 Indigo-600 테마의 세련된 UI를 구현합니다.",
+        "details": "1. `frontend/css/style.css` 작성.\n2. Primary Color(#2563eb) 적용 및 버튼 hover/active 상태 디자인.\n3. 로딩 스피너 및 반응형 레이아웃(flex/grid) 설정.\n4. 선택된 수신 대상 버튼의 `.active` 클래스 스타일 정의.",
+        "testStrategy": "브라우저 개발자 도구를 통해 다양한 해상도에서 레이아웃 깨짐 확인 및 버튼 인터랙션 확인.",
+        "priority": "medium",
+        "dependencies": [
+          "5"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.046Z"
+      },
+      {
+        "id": "7",
+        "title": "프론트엔드 JavaScript 기능 및 API 연동",
+        "description": "버튼 클릭 이벤트 처리, API 호출, 로딩 처리 및 결과 출력을 구현합니다.",
+        "details": "1. `frontend/js/app.js` 작성.\n2. 수신 대상 버튼 클릭 시 클래스 토글 로직 구현.\n3. 변환 버튼 클릭 시 `fetch` API를 사용하여 백엔드 `/api/convert`와 통신.\n4. 로딩 중 버튼 비활성화 및 스피너 표시 처리.\n5. `navigator.clipboard.writeText`를 이용한 결과 복사 기능 구현.",
+        "testStrategy": "입력창에 텍스트 입력 후 변환 버튼 클릭 시 결과창에 변환된 텍스트가 정상적으로 출력되는지 확인.",
+        "priority": "high",
+        "dependencies": [
+          "4",
+          "6"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.049Z"
+      },
+      {
+        "id": "8",
+        "title": "Playwright를 이용한 E2E UI 테스트",
+        "description": "PRD의 완료 체크리스트에 명시된 4가지 대상별 변환 테스트를 자동화합니다.",
+        "details": "1. `playwright` 설치 및 테스트 스크립트 작성.\n2. 상사, 동료, 고객, 팀원 각 케이스별로 입력 -> 변환 -> 결과 확인 시나리오 수행.\n3. 테스트 결과 보고서를 `@test_result/index_test.md`에 기록.",
+        "testStrategy": "`npx playwright test` 명령어를 실행하여 모든 테스트 케이스가 통과(Pass)하는지 확인.",
+        "priority": "medium",
+        "dependencies": [
+          "7"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-24T08:37:10.052Z"
+      },
+      {
+        "id": "9",
+        "title": "백엔드 배포 (Render/Railway)",
+        "description": "백엔드 API 서버를 클라우드 환경에 배포합니다.",
+        "details": "1. Render 또는 Railway에 GitHub 레포지토리 연결.\n2. 환경 변수 `UPSTAGE_API_KEY` 설정.\n3. Start Command 설정: `uvicorn main:app --host 0.0.0.0 --port $PORT`.\n4. 배포된 서버의 URL 확인.",
+        "testStrategy": "배포된 URL의 `/health` 엔드포인트와 Swagger UI가 정상적으로 응답하는지 확인.",
+        "priority": "medium",
+        "dependencies": [
+          "4"
+        ],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Vercel Monorepo 설정을 위한 vercel.json 작성",
+            "description": "FastAPI 백엔드와 정적 프론트엔드를 동시에 배포하기 위한 Vercel 설정 파일을 생성합니다.",
+            "dependencies": [],
+            "details": "루트 디렉토리에 vercel.json을 생성하고, 'backend/main.py'를 Python 런타임으로 설정하며 'frontend' 디렉토리를 정적 파일로 서빙하도록 builds와 routes 설정을 구성합니다.",
+            "status": "done",
+            "testStrategy": "vercel.json 파일의 문법적 올바름과 builds/routes 설정이 Vercel 공식 문서의 Python 런타임 가이드를 따르는지 확인합니다.",
+            "updatedAt": "2026-04-24T08:50:44.439Z",
+            "parentId": "undefined"
+          },
+          {
+            "id": 2,
+            "title": "루트 디렉토리 requirements.txt 생성 및 의존성 통합",
+            "description": "Vercel 빌드 프로세스에서 Python 의존성을 설치할 수 있도록 루트 경로에 설정 파일을 준비합니다.",
+            "dependencies": [
+              1
+            ],
+            "details": "backend/requirements.txt에 정의된 fastapi, uvicorn, langchain-upstage 등의 필수 패키지들을 루트 requirements.txt에 포함시켜 Vercel 배포 시 의존성 누락이 없도록 합니다.",
+            "status": "done",
+            "testStrategy": "로컬 환경에서 루트 requirements.txt를 사용하여 패키지가 모두 정상적으로 설치되는지 'pip install -r requirements.txt' 명령어로 확인합니다.",
+            "parentId": "undefined",
+            "updatedAt": "2026-04-24T08:50:44.444Z"
+          },
+          {
+            "id": 3,
+            "title": "프론트엔드 API 호출 경로 및 JS 파일 경로 수정",
+            "description": "배포 환경에서 API 통신이 가능하도록 frontend/js/app.js의 서버 주소를 수정합니다.",
+            "dependencies": [
+              2
+            ],
+            "details": "프론트엔드 자바스크립트 코드 내의 API_BASE_URL을 하드코딩된 localhost 대신 현재 도메인을 기준으로 하거나 Vercel 환경 변수를 참조하도록 변경하여 CORS 이슈 및 경로 에러를 방지합니다.",
+            "status": "done",
+            "testStrategy": "배포 후 브라우저 개발자 도구의 Network 탭을 통해 API 호출이 배포된 API 엔드포인트로 정상 전달되는지 확인합니다.",
+            "parentId": "undefined",
+            "updatedAt": "2026-04-24T08:50:44.448Z"
+          },
+          {
+            "id": 4,
+            "title": "Vercel 배포 및 환경 변수 UPSTAGE_API_KEY 설정",
+            "description": "Vercel 대시보드를 통해 최종 배포를 수행하고 LLM 연동을 위한 키를 설정합니다.",
+            "dependencies": [
+              3
+            ],
+            "details": "GitHub 레포지토리를 Vercel 프로젝트에 연결하고, Project Settings에서 UPSTAGE_API_KEY를 환경 변수로 등록한 뒤 프로덕션 배포를 실행하여 서비스의 정상 작동 여부를 검증합니다.",
+            "status": "pending",
+            "testStrategy": "배포된 최종 URL에 접속하여 비즈니스 이메일 변환 요청을 수행하고, Upstage API 응답이 화면에 올바르게 출력되는지 확인합니다.",
+            "parentId": "undefined"
+          }
+        ],
+        "updatedAt": "2026-04-24T08:50:44.448Z"
+      },
+      {
+        "id": "10",
+        "title": "프론트엔드 배포 및 최종 연동 (Vercel)",
+        "description": "프론트엔드를 Vercel에 배포하고 운영 서버 주소로 최종 연동합니다.",
+        "details": "1. `frontend/js/app.js`의 `API_BASE`를 배포된 백엔드 URL로 수정.\n2. `backend/main.py`의 CORS 설정을 배포된 프론트엔드 URL로 업데이트.\n3. Vercel에 프론트엔드 정적 파일 배포.\n4. 배포된 사이트에서 실제 서비스 동작 최종 확인.",
+        "testStrategy": "실제 배포된 도메인에 접속하여 원문 입력부터 결과 복사까지의 전 과정을 테스트하고 에러 발생 여부 확인.",
+        "priority": "medium",
+        "dependencies": [
+          "7",
+          "9"
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2026-04-24T08:50:44.448Z",
+      "taskCount": 10,
+      "completedCount": 8,
+      "tags": [
+        "master"
+      ]
+    }
+  }
+}

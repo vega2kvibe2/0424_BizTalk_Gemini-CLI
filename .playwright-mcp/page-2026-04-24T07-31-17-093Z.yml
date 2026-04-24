@@ -1,0 +1,174 @@
+- generic [ref=e3]:
+  - generic:
+    - img
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - heading "Business Tone Converter API 0.1.0 OAS 3.1" [level=1] [ref=e9]:
+        - text: Business Tone Converter API
+        - generic [ref=e10]:
+          - generic [ref=e12]: 0.1.0
+          - generic [ref=e14]: OAS 3.1
+      - link "/openapi.json" [ref=e15] [cursor=pointer]:
+        - /url: /openapi.json
+        - generic [ref=e16]: /openapi.json
+    - generic [ref=e21]:
+      - heading "default Collapse operation" [level=3] [ref=e22] [cursor=pointer]:
+        - link "default" [ref=e23]:
+          - /url: "#/default"
+        - button "Collapse operation" [expanded] [ref=e24]:
+          - img [ref=e25]
+      - generic [ref=e28]:
+        - generic [ref=e30]:
+          - generic [ref=e31] [cursor=pointer]:
+            - button "POST /api/convert Convert Tone" [expanded] [active] [ref=e32]:
+              - generic [ref=e33]: POST
+              - generic [ref=e34]:
+                - link "/api/convert" [ref=e36]:
+                  - /url: "#/default/convert_tone_api_convert_post"
+                  - generic [ref=e37]:
+                    - text: /api
+                    - text: /convert
+                - generic [ref=e38]: Convert Tone
+            - generic "Copy to clipboard" [ref=e209]:
+              - img [ref=e210]
+            - button "post /api/convert" [expanded] [ref=e41]:
+              - img [ref=e211]
+          - generic [ref=e214]:
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - heading "Parameters" [level=4] [ref=e219] [cursor=pointer]
+                - button "Try it out" [ref=e221] [cursor=pointer]
+              - paragraph [ref=e224]: No parameters
+              - generic [ref=e225]:
+                - generic [ref=e226]:
+                  - heading "Request bodyrequired" [level=4] [ref=e227]
+                  - combobox "Request content type" [ref=e230]:
+                    - option "application/json" [selected]
+                - generic [ref=e233]:
+                  - tablist [ref=e234]:
+                    - tab "Example Value" [selected] [ref=e235] [cursor=pointer]
+                    - tab "Schema" [ref=e236] [cursor=pointer]
+                  - tabpanel "Example Value" [ref=e237]:
+                    - code [ref=e240]: "{ \"text\": \"string\", \"target_audience\": \"string\" }"
+            - generic [ref=e242]:
+              - heading "Responses" [level=4] [ref=e244]
+              - region [ref=e246]:
+                - rowgroup [ref=e247]:
+                  - row "Code Description Links" [ref=e248]:
+                    - cell "Code" [ref=e249]
+                    - cell "Description" [ref=e250]
+                    - cell "Links" [ref=e251]
+                - rowgroup [ref=e252]:
+                  - row "200 Successful Response Media type application/json Controls Accept header. Example Value No links" [ref=e253]:
+                    - cell "200" [ref=e254]
+                    - cell "Successful Response Media type application/json Controls Accept header. Example Value" [ref=e255]:
+                      - paragraph [ref=e258]: Successful Response
+                      - generic [ref=e260]:
+                        - generic [ref=e261]: Media type
+                        - combobox "Media Type" [ref=e263]:
+                          - option "application/json" [selected]
+                        - generic [ref=e264]:
+                          - text: Controls
+                          - code [ref=e265]: Accept
+                          - text: header.
+                      - generic [ref=e266]:
+                        - tablist [ref=e267]:
+                          - tab "Example Value" [selected] [ref=e268] [cursor=pointer]
+                          - tab "Schema" [ref=e269] [cursor=pointer]
+                        - tabpanel "Example Value" [ref=e270]:
+                          - code [ref=e274]: "{ \"converted_text\": \"string\", \"target_audience\": \"string\", \"original_text\": \"string\" }"
+                    - cell "No links" [ref=e275]
+                  - row "422 Validation Error Media type application/json Example Value No links" [ref=e276]:
+                    - cell "422" [ref=e277]
+                    - cell "Validation Error Media type application/json Example Value" [ref=e278]:
+                      - paragraph [ref=e281]: Validation Error
+                      - generic [ref=e283]:
+                        - generic [ref=e284]: Media type
+                        - combobox "Media Type" [ref=e286]:
+                          - option "application/json" [selected]
+                      - generic [ref=e287]:
+                        - tablist [ref=e288]:
+                          - tab "Example Value" [selected] [ref=e289] [cursor=pointer]
+                          - tab "Schema" [ref=e290] [cursor=pointer]
+                        - tabpanel "Example Value" [ref=e291]:
+                          - code [ref=e295]: "{ \"detail\": [ { \"loc\": [ \"string\", 0 ], \"msg\": \"string\", \"type\": \"string\", \"input\": \"string\", \"ctx\": {} } ] }"
+                    - cell "No links" [ref=e296]
+        - generic [ref=e45]:
+          - generic [ref=e46] [cursor=pointer]:
+            - button "GET /health Health Check" [expanded] [ref=e47]:
+              - generic [ref=e48]: GET
+              - generic [ref=e49]:
+                - link "/health" [ref=e51]:
+                  - /url: "#/default/health_check_health_get"
+                - generic [ref=e52]: Health Check
+            - generic "Copy to clipboard"
+            - button "get /health" [expanded] [ref=e55]:
+              - img [ref=e160]
+          - generic [ref=e163]:
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - heading "Parameters" [level=4] [ref=e168] [cursor=pointer]
+                - button "Try it out" [ref=e170] [cursor=pointer]
+              - paragraph [ref=e173]: No parameters
+            - generic [ref=e175]:
+              - heading "Responses" [level=4] [ref=e177]
+              - region [ref=e179]:
+                - rowgroup [ref=e180]:
+                  - row "Code Description Links" [ref=e181]:
+                    - cell "Code" [ref=e182]
+                    - cell "Description" [ref=e183]
+                    - cell "Links" [ref=e184]
+                - rowgroup [ref=e185]:
+                  - row "200 Successful Response Media type application/json Controls Accept header. Example Value No links" [ref=e186]:
+                    - cell "200" [ref=e187]
+                    - cell "Successful Response Media type application/json Controls Accept header. Example Value" [ref=e188]:
+                      - paragraph [ref=e191]: Successful Response
+                      - generic [ref=e193]:
+                        - generic [ref=e194]: Media type
+                        - combobox "Media Type" [ref=e196]:
+                          - option "application/json" [selected]
+                        - generic [ref=e197]:
+                          - text: Controls
+                          - code [ref=e198]: Accept
+                          - text: header.
+                      - generic [ref=e199]:
+                        - tablist [ref=e200]:
+                          - tab "Example Value" [selected] [ref=e201] [cursor=pointer]
+                          - tab "Schema" [ref=e202] [cursor=pointer]
+                        - tabpanel "Example Value" [ref=e203]:
+                          - code [ref=e207]: "\"string\""
+                    - cell "No links" [ref=e208]
+    - generic [ref=e60]:
+      - heading "Schemas" [level=4] [ref=e61] [cursor=pointer]:
+        - button "Schemas" [expanded] [ref=e62]:
+          - generic [ref=e63]: Schemas
+          - img [ref=e64]
+      - generic [ref=e66]:
+        - article [ref=e67]:
+          - generic [ref=e68]:
+            - button "ConvertRequest" [ref=e69] [cursor=pointer]:
+              - generic [ref=e71]: ConvertRequest
+              - img [ref=e73]
+            - button "Expand all" [ref=e75] [cursor=pointer]
+            - strong [ref=e76]: object
+        - article [ref=e77]:
+          - generic [ref=e78]:
+            - button "ConvertResponse" [ref=e79] [cursor=pointer]:
+              - generic [ref=e81]: ConvertResponse
+              - img [ref=e83]
+            - button "Expand all" [ref=e85] [cursor=pointer]
+            - strong [ref=e86]: object
+        - article [ref=e87]:
+          - generic [ref=e88]:
+            - button "HTTPValidationError" [ref=e89] [cursor=pointer]:
+              - generic [ref=e91]: HTTPValidationError
+              - img [ref=e93]
+            - button "Expand all" [ref=e95] [cursor=pointer]
+            - strong [ref=e96]: object
+        - article [ref=e97]:
+          - generic [ref=e98]:
+            - button "ValidationError" [ref=e99] [cursor=pointer]:
+              - generic [ref=e101]: ValidationError
+              - img [ref=e103]
+            - button "Expand all" [ref=e105] [cursor=pointer]
+            - strong [ref=e106]: object
