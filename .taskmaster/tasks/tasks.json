@@ -169,12 +169,13 @@
               3
             ],
             "details": "GitHub 레포지토리를 Vercel 프로젝트에 연결하고, Project Settings에서 UPSTAGE_API_KEY를 환경 변수로 등록한 뒤 프로덕션 배포를 실행하여 서비스의 정상 작동 여부를 검증합니다.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "배포된 최종 URL에 접속하여 비즈니스 이메일 변환 요청을 수행하고, Upstage API 응답이 화면에 올바르게 출력되는지 확인합니다.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-24T09:25:56.330Z"
           }
         ],
-        "updatedAt": "2026-04-24T08:50:44.448Z"
+        "updatedAt": "2026-04-24T09:25:56.330Z"
       },
       {
         "id": "10",
@@ -193,7 +194,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-24T08:50:44.448Z",
+      "lastModified": "2026-04-24T09:25:56.330Z",
       "taskCount": 10,
       "completedCount": 8,
       "tags": [
